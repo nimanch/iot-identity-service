@@ -150,12 +150,13 @@ macro_rules! make_service {
                                                         .with_kind(opentelemetry::trace::SpanKind::Server)
                                                         .with_parent_context(parent_cx)
                                                     .start(&tracer);
-                                                    let cx: opentelemetry::Context = opentelemetry::trace::TraceContextExt::current_with_span(span);                                            
+                                                    let cx: opentelemetry::Context = opentelemetry::trace::TraceContextExt::current_with_span(span);
                                                     match opentelemetry::trace::FutureExt::with_context(<$route as http_common::server::Route>::get(route), cx.clone()).await {
                                                         Ok(result) => result,
                                                         Err(err) => return Ok(err.to_http_response()),
                                                     }
                                                 } else {
+                                                    blah
                                                     match <$route as http_common::server::Route>::get(route).await {
                                                         Ok(result) => result,
                                                         Err(err) => return Ok(err.to_http_response()),
