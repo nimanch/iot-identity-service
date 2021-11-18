@@ -138,6 +138,7 @@ macro_rules! make_service {
                                         http::Method::GET => {
                                             cfg_if::cfg_if! {
                                                 if #[cfg(feature = "otel")] {
+                                                     vlah
                                                     let parent_cx = opentelemetry::global::get_text_map_propagator(|propagator| {
                                                         propagator.extract(&opentelemetry_http::HeaderExtractor(&headers))
                                                     });
