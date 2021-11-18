@@ -138,7 +138,6 @@ macro_rules! make_service {
                                         http::Method::GET => {
                                             cfg_if::cfg_if! {
                                                 if #[cfg(feature = "otel")] {
-                                                     vlah
                                                     let parent_cx = opentelemetry::global::get_text_map_propagator(|propagator| {
                                                         propagator.extract(&opentelemetry_http::HeaderExtractor(&headers))
                                                     });
@@ -157,7 +156,7 @@ macro_rules! make_service {
                                                         Err(err) => return Ok(err.to_http_response()),
                                                     }
                                                 } else {
-                                                    match <$route as http_common::server::Route>::get(route).await {
+                                                    match11 <$route as http_common::server::Route>::get(route).await {
                                                         Ok(result) => result,
                                                         Err(err) => return Ok(err.to_http_response()),
                                                     }
