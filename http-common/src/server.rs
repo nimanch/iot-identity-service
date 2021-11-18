@@ -136,8 +136,6 @@ macro_rules! make_service {
                                         },
 
                                         http::Method::GET => {
-                                            cfg_if::cfg_if! {
-                                                if #[cfg(feature = "otel")] {
                                                     let parent_cx = opentelemetry::global::get_text_map_propagator(|propagator| {
                                                         propagator.extract(&opentelemetry_http::HeaderExtractor(&headers))
                                                     });
@@ -150,18 +148,11 @@ macro_rules! make_service {
                                                         .with_kind(opentelemetry::trace::SpanKind::Server)
                                                         .with_parent_context(parent_cx)
                                                     .start(&tracer);
-                                                    let cx: opentelemetry::Context = opentelemetry::trace::TraceContextExt::current_with_span(span);                                            
+                                                    let cx: opentelemetry::Context = opentelemetry::trace::TraceContextExt::current_with_span(span);
                                                     match opentelemetry::trace::FutureExt::with_context(<$route as http_common::server::Route>::get(route), cx.clone()).await {
                                                         Ok(result) => result,
                                                         Err(err) => return Ok(err.to_http_response()),
                                                     }
-                                                } else {
-                                                    match <$route as http_common::server::Route>::get(route).await {
-                                                        Ok(result) => result,
-                                                        Err(err) => return Ok(err.to_http_response()),
-                                                    }
-                                                }
-                                            }
                                         },
 
                                         http::Method::POST => {
