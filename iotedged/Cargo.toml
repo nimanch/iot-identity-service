@@ -18,7 +18,7 @@ structopt = "0.3"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 url = "2"
 
-http-common = { path = "../http-common" }
+http-common = { path = "../http-common", features = ["otel"] }
 aziot-cert-client-async = { path = "../cert/aziot-cert-client-async" }
 aziot-cert-common-http = { path = "../cert/aziot-cert-common-http" }
 aziot-key-client = { path = "../key/aziot-key-client" }

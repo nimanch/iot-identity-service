@@ -19,7 +19,7 @@ url = "2"
 aziot-key-client = { path = "../aziot-key-client" }
 aziot-key-common-http = { path = "../aziot-key-common-http" }
 aziot-key-openssl-engine = { path = "../aziot-key-openssl-engine" }
-http-common = { path = "../../http-common" }
+http-common = { path = "../../http-common", features = ["otel"] }
 openssl-sys2 = { path = "../../openssl-sys2" }
 
 

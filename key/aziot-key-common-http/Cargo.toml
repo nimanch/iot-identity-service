@@ -8,4 +8,4 @@ edition = "2018"
 serde = { version = "1", features = ["derive"] }
 
 aziot-key-common = { path = "../aziot-key-common" }
-http-common = { path = "../../http-common" }
+http-common = { path = "../../http-common", features = ["otel"] }
