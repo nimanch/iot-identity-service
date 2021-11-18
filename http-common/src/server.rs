@@ -156,7 +156,6 @@ macro_rules! make_service {
                                                         Err(err) => return Ok(err.to_http_response()),
                                                     }
                                                 } else {
-                                                    blah
                                                     match <$route as http_common::server::Route>::get(route).await {
                                                         Ok(result) => result,
                                                         Err(err) => return Ok(err.to_http_response()),
